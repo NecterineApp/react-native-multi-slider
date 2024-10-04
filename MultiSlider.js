@@ -54,6 +54,9 @@ export default class MultiSlider extends React.Component {
     minMarkerOverlapDistance: 0,
     minMarkerOverlapStepDistance: 0,
     testID: '',
+    trackEndRadius: 0,
+    unselectedStyle: {},
+    selectedStyle: {},
   };
 
   constructor(props) {
@@ -494,6 +497,7 @@ export default class MultiSlider extends React.Component {
       sliderLength,
       markerOffsetX,
       markerOffsetY,
+      trackEndRadius,
     } = this.props;
     const twoMarkers = this.props.values.length == 2; // when allowOverlap, positionTwo could be 0, identified as string '0' and throwing 'RawText 0 needs to be wrapped in <Text>' error
 
@@ -507,6 +511,14 @@ export default class MultiSlider extends React.Component {
     const trackTwoStyle = twoMarkers
       ? selectedStyle || styles.selectedTrack
       : unselectedStyle;
+
+    if (twoMarkers && trackEndRadius > 0) {
+      trackOneStyle.borderTopLeftRadius = trackEndRadius;
+      trackOneStyle.borderBottomLeftRadius = trackEndRadius;
+      trackThreeStyle.borderTopRightRadius = trackEndRadius;
+      trackThreeStyle.borderBottomRightRadius = trackEndRadius;
+    }
+
     const Marker = this.props.customMarker;
 
     const MarkerLeft = this.props.customMarkerLeft;
