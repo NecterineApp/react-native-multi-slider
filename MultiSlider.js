@@ -512,13 +512,6 @@ export default class MultiSlider extends React.Component {
       ? selectedStyle || styles.selectedTrack
       : unselectedStyle;
 
-    if (twoMarkers && trackEndRadius > 0) {
-      trackOneStyle.borderTopLeftRadius = trackEndRadius;
-      trackOneStyle.borderBottomLeftRadius = trackEndRadius;
-      trackThreeStyle.borderTopRightRadius = trackEndRadius;
-      trackThreeStyle.borderBottomRightRadius = trackEndRadius;
-    }
-
     const Marker = this.props.customMarker;
 
     const MarkerLeft = this.props.customMarkerLeft;
@@ -565,6 +558,8 @@ export default class MultiSlider extends React.Component {
               styles.track,
               this.props.trackStyle,
               trackOneStyle,
+              twoMarkers && trackEndRadius && { borderTopLeftRadius: trackEndRadius },
+              twoMarkers && trackEndRadius && { borderBottomLeftRadius: trackEndRadius },
               { width: trackOneLength },
             ]}
           />
@@ -583,6 +578,8 @@ export default class MultiSlider extends React.Component {
                 styles.track,
                 this.props.trackStyle,
                 trackThreeStyle,
+                twoMarkers && trackEndRadius && { borderTopRightRadius: trackEndRadius },
+                twoMarkers && trackEndRadius && { borderBottomRightRadius: trackEndRadius },
                 { width: trackThreeLength },
               ]}
             />
